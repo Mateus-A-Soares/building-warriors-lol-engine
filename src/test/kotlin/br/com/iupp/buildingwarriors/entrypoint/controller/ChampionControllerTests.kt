@@ -1,6 +1,6 @@
 package br.com.iupp.buildingwarriors.entrypoint.controller
 
-import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.championToResponse
+import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.Companion.championToResponse
 import br.com.iupp.buildingwarriors.core.model.Champion
 import br.com.iupp.buildingwarriors.core.model.ChampionDifficulty.*
 import br.com.iupp.buildingwarriors.core.model.ChampionRole.*

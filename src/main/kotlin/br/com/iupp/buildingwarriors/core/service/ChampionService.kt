@@ -1,13 +1,13 @@
 package br.com.iupp.buildingwarriors.core.service
 
-import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.championToResponse
+import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.Companion.championToResponse
 import br.com.iupp.buildingwarriors.core.ports.ChampionRepositoryPort
 import br.com.iupp.buildingwarriors.core.ports.ChampionServicePort
 import java.util.*
 import javax.inject.Singleton
 
 @Singleton
-open class ChampionServiceImpl(private val championRepository: ChampionRepositoryPort) : ChampionServicePort {
+open class ChampionService(private val championRepository: ChampionRepositoryPort) : ChampionServicePort {
 
     override fun findAll() = championRepository.findAll().map(::championToResponse)
 

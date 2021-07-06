@@ -1,6 +1,6 @@
 package br.com.iupp.buildingwarriors.core.service
 
-import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.championToResponse
+import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.Companion.championToResponse
 import br.com.iupp.buildingwarriors.core.model.Champion
 import br.com.iupp.buildingwarriors.core.model.ChampionDifficulty
 import br.com.iupp.buildingwarriors.core.model.ChampionRole
@@ -16,7 +16,7 @@ import java.util.*
 class ChampionServiceTests : AnnotationSpec() {
 
     private val mockedRepository = mockk<ChampionRepositoryPort>()
-    private val service = ChampionServiceImpl(mockedRepository)
+    private val service = ChampionService(mockedRepository)
     private val championList = listOf(
         Champion(
             id = UUID.randomUUID(),
@@ -63,7 +63,7 @@ class ChampionServiceTests : AnnotationSpec() {
     @Test
     private fun `Deveria retornar todos campeoes encontrados pelo repositorio`() {
         every {mockedRepository.findAll()} returns championList
-        service.findAll() shouldBe championList.map(::championToResponse)
+        service.findAll() shouldBe  championList.map(::championToResponse)
     }
 
     @Test

@@ -1,4 +1,4 @@
-package br.com.iupp.buildingwarriors.infrastructure.repository.entity
+package br.com.iupp.buildingwarriors.infrastructure.database.entity
 
 import java.util.*
 import javax.validation.constraints.NotBlank

@@ -1,7 +1,7 @@
-package br.com.iupp.buildingwarriors.infrastructure.repository
+package br.com.iupp.buildingwarriors.infrastructure.database
 
 import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper
-import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.cqlRowToChampion
+import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.Companion.cqlRowToChampion
 import br.com.iupp.buildingwarriors.core.model.Champion
 import br.com.iupp.buildingwarriors.core.ports.ChampionRepositoryPort
 import com.datastax.oss.driver.api.core.CqlSession
@@ -11,7 +11,7 @@ import java.util.stream.Collectors
 import javax.inject.Singleton
 
 @Singleton
-class ChampionRepositoryImpl(private val cqlSession: CqlSession) : ChampionRepositoryPort {
+class ChampionDatabase(private val cqlSession: CqlSession) : ChampionRepositoryPort {
 
     override fun findById(id: UUID): Optional<Champion> {
         return Optional.ofNullable(

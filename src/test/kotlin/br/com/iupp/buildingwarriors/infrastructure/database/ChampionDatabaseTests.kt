@@ -1,10 +1,8 @@
-package br.com.iupp.buildingwarriors.infrastructure.repository
+package br.com.iupp.buildingwarriors.infrastructure.database
 
-import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper
-import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.championEntityToModel
-import br.com.iupp.buildingwarriors.infrastructure.repository.entity.ChampionDifficulty.*
-import br.com.iupp.buildingwarriors.infrastructure.repository.entity.ChampionEntity
-import br.com.iupp.buildingwarriors.infrastructure.repository.entity.ChampionRole.*
+import br.com.iupp.buildingwarriors.infrastructure.database.entity.ChampionDifficulty.*
+import br.com.iupp.buildingwarriors.infrastructure.database.entity.ChampionEntity
+import br.com.iupp.buildingwarriors.infrastructure.database.entity.ChampionRole.*
 import com.datastax.oss.driver.api.core.CqlSession
 import com.datastax.oss.driver.api.core.cql.Row
 import com.datastax.oss.driver.api.core.cql.SimpleStatement
@@ -14,12 +12,13 @@ import io.micronaut.test.extensions.kotest.annotation.MicronautTest
 import io.mockk.every
 import io.mockk.mockk
 import java.util.*
+import br.com.iupp.buildingwarriors.core.mapper.ChampionMapper.Companion.championEntityToModel
 
 @MicronautTest
-class ChampionRepositoryImplTests : AnnotationSpec() {
+class ChampionDatabaseTests : AnnotationSpec() {
 
     private val mockedCqlSession = mockk<CqlSession>(relaxed = true)
-    private val championRepositoryImpl = ChampionRepositoryImpl(mockedCqlSession)
+    private val championRepositoryImpl = ChampionDatabase(mockedCqlSession)
 
     private val championList = listOf(
         ChampionEntity(
@@ -70,7 +69,7 @@ class ChampionRepositoryImplTests : AnnotationSpec() {
         every {
             mockedCqlSession.execute(SimpleStatement.newInstance("SELECT * FROM champion")).all()
         } returns championList.map(this::championEntityToMockedRow)
-        championRepositoryImpl.findAll() shouldBe championList.map(ChampionMapper::championEntityToModel)
+        championRepositoryImpl.findAll() shouldBe championList.map(::championEntityToModel)
     }
 
     @Test
